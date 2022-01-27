@@ -1,18 +1,21 @@
+
 package com.example.simpleparadox.listycity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.SparseBooleanArray;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
+
 import android.widget.ListView;
+
+import com.example.simpleparadox.listycityity.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,16 +39,26 @@ public class MainActivity extends AppCompatActivity {
 
         cityList = findViewById(R.id.city_list);
 
-        //String []cities ={"Edmonton", "Vancouver", "Moscow", "Sydney", "Berlin", "Vienna", "Tokyo", "Beijing", "Osaka", "New Delhi"};
+        String []cities ={"1707077", "Md Fiaz Rahman", "Osaka"};
 
         dataList = new ArrayList<>();
 
-        //dataList.addAll(Arrays.asList(cities));
+        dataList.addAll(Arrays.asList(cities));
 
         cityAdapter = new ArrayAdapter<>(this, R.layout.content, dataList);
 
 
         cityList.setAdapter(cityAdapter);
+
+        cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+                Intent intent = new Intent(MainActivity.this, ShowActivity.class);
+                intent.putExtra("city_name", cities[i]);
+                startActivity(intent);
+
+            }
+        });
 
         final Button addButton = findViewById(R.id.button_add);
         addButton.setOnClickListener(new View.OnClickListener() {
